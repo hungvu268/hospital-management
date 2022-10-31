@@ -153,7 +153,7 @@ public class Channel extends javax.swing.JFrame {
                 
                 long id = Long.parseLong(rs.getString("MAX(channelno)").substring(2, rs.getString("MAX(channelno)").length()));
                 id++;
-                 lbchno.setText("DS" + String.format("%03d", id));
+                 lbchno.setText("CH" + String.format("%03d", id));
                 
             }
             
