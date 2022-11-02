@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -20,32 +19,20 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author LENOVO
  */
-public class viewChannel extends javax.swing.JFrame {
+public class viewPrescription extends javax.swing.JFrame {
 
     /**
-     * Creates new form viewChannel
+     * Creates new form viewPrescription
      */
-    public viewChannel() {
+    public viewPrescription() {
         initComponents();
-    }
-    
-    int id;
-    int newid;
-    
-    public viewChannel(int id) {
-        initComponents();
-       
-        this.id = id;
-        newid = id;
         Connect();
-        channel_table();
-        
+        prescription_table();
     }
     
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
-    
     
     public void Connect(){
         
@@ -59,15 +46,12 @@ public class viewChannel extends javax.swing.JFrame {
         }
         
     }
-
     
     
-    public void channel_table(){
+    public void prescription_table(){
         
         try {
-            pst = con.prepareStatement("select channel.channelno, doctor.name, patient.patientname, channel.roomno, channel.date from doctor INNER JOIN channel on channel.doctorname = doctor.doctorno INNER JOIN patient on channel.patientname = patient.patientno where doctor.log_id = ?");
-            pst.setInt(1, newid);
-            
+            pst = con.prepareStatement("select * from prescription");
             rs = pst.executeQuery();
         
             ResultSetMetaData Rsm = rs.getMetaData();      
@@ -82,11 +66,11 @@ public class viewChannel extends javax.swing.JFrame {
                 Vector v2 = new Vector();
                 
                 for(int i = 1; i <= c;i++){
-                    v2.add(rs.getString(1));
-                    v2.add(rs.getString(2));
-                    v2.add(rs.getString(3));
-                    v2.add(rs.getString(4));
-                    v2.add(rs.getString(5));
+                    v2.add(rs.getString("pid"));
+                    v2.add(rs.getString("channelid"));
+                    v2.add(rs.getString("doctorname"));
+                    v2.add(rs.getString("detype"));
+                    v2.add(rs.getString("description"));
                 }
                 
                 df.addRow(v2);
@@ -95,13 +79,12 @@ public class viewChannel extends javax.swing.JFrame {
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(Channel.Patient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Patient.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         
     }
-    
     
     
     /**
@@ -114,46 +97,37 @@ public class viewChannel extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 0, 102));
-
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setText("View Channel");
-
-        jButton1.setText("Exit");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Channel no", "Doctor name", "Patient name", "Room no", "Date"
+                "Prescription ID", "Channel ID", "Doctor Name", "Desease Type", "Description"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Prescription");
+        jButton1.setText("Inventory");
+
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -164,51 +138,54 @@ public class viewChannel extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(232, 232, 232)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(286, 286, 286)
-                .addComponent(jLabel1)
-                .addContainerGap(362, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(61, 61, 61)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(73, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(391, 391, 391)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(71, 71, 71)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGap(71, 71, 71)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setText("View Prescription");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -217,28 +194,9 @@ public class viewChannel extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-
-        DefaultTableModel d1 = (DefaultTableModel) jTable1.getModel();
-        int selectIndex = jTable1.getSelectedRow();
-
-//        chno = d1.getValueAt(selectIndex,0).toString();
-
-        //        JOptionPane.showMessageDialog(this, chno);
-
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel d1 = (DefaultTableModel) jTable1.getModel();
-        
-        int selectedIndex = jTable1.getSelectedRow();
-        
-        String chno = d1.getValueAt(selectedIndex, 0).toString();
-        String doctorname = d1.getValueAt(selectedIndex, 1).toString();
-        
-        new Prescription(chno, doctorname).setVisible(true);
+        this.setVisible(false);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -259,20 +217,20 @@ public class viewChannel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(viewChannel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(viewChannel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(viewChannel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(viewChannel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewPrescription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new viewChannel().setVisible(true);
+                new viewPrescription().setVisible(true);
             }
         });
     }

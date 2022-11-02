@@ -31,7 +31,7 @@ public class Item extends javax.swing.JFrame {
         initComponents();
         Connect();
         AutoID();
-        patien_table();
+        item_table();
         
     }
 
@@ -55,7 +55,7 @@ public class Item extends javax.swing.JFrame {
     public void AutoID(){
         try {
             Statement s = con.createStatement();
-            rs = s.executeQuery("select MAX(itemid) from patient");
+            rs = s.executeQuery("select MAX(itemid) from item");
             rs.next();
             rs.getString("MAX(itemid)");
             
@@ -77,10 +77,10 @@ public class Item extends javax.swing.JFrame {
         
     }
     
-    public void patien_table(){
+    public void item_table(){
         
         try {
-            pst = con.prepareStatement("select * from patient");
+            pst = con.prepareStatement("select * from item");
             rs = pst.executeQuery();
         
             ResultSetMetaData Rsm = rs.getMetaData();      
@@ -95,10 +95,12 @@ public class Item extends javax.swing.JFrame {
                 Vector v2 = new Vector();
                 
                 for(int i = 1; i <= c;i++){
-                    v2.add(rs.getString("patientno"));
-                    v2.add(rs.getString("patientname"));
-                    v2.add(rs.getString("phone"));
-                    v2.add(rs.getString("address"));
+                    v2.add(rs.getString("itemid"));
+                    v2.add(rs.getString("itemname"));
+                    v2.add(rs.getString("description"));
+                    v2.add(rs.getString("sellprice"));
+                    v2.add(rs.getString("buyprice"));
+                    v2.add(rs.getString("qty"));
                 }
                 
                 df.addRow(v2);
@@ -377,21 +379,25 @@ public class Item extends javax.swing.JFrame {
         String qty = txtqty.getText();
         
         try {
-            pst = con.prepareStatement("insert into patient (patientno, patientname, phone, address)values(?,?,?,?)");
-            pst.setString(1, pno);
-            pst.setString(2, name);
-            pst.setString(3, phone);
-            pst.setString(4, address);
+            pst = con.prepareStatement("insert into item (itemid, itemname, description, sellprice, buyprice, qty)values(?,?,?,?,?,?)");
+            pst.setString(1, itemno);
+            pst.setString(2, itemname);
+            pst.setString(3, description);
+            pst.setString(4, sellprice);
+            pst.setString(5, buyprice);
+            pst.setString(6, qty);
             pst.executeUpdate();
             
-            JOptionPane.showMessageDialog(this, "Patient Inserteddddd!");
+            JOptionPane.showMessageDialog(this, "Item Inserteddddd!");
             
             AutoID();
             txtitname.setText("");
             txtdes.setText("");
-            txtpa.setText("");
+            txtsell.setText("");
+            txtbuy.setText("");
+            txtqty.setText("");
             txtitname.requestFocus();
-            patien_table();
+            item_table();
             
         } catch (SQLException ex) {
             Logger.getLogger(Patient.class.getName()).log(Level.SEVERE, null, ex);
@@ -407,7 +413,9 @@ public class Item extends javax.swing.JFrame {
         lbitid.setText(d1.getValueAt(SelectIndex, 0).toString());
         txtitname.setText(d1.getValueAt(SelectIndex, 1).toString());
         txtdes.setText(d1.getValueAt(SelectIndex, 2).toString());
-        txtpa.setText(d1.getValueAt(SelectIndex, 3).toString());
+        txtsell.setText(d1.getValueAt(SelectIndex, 3).toString());
+        txtbuy.setText(d1.getValueAt(SelectIndex, 4).toString());
+        txtqty.setText(d1.getValueAt(SelectIndex, 5).toString());
         
         jButton1.setEnabled(false);
         
@@ -416,28 +424,34 @@ public class Item extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        String name = txtitname.getText();
-        String phone = txtdes.getText();
-        String address = txtpa.getText();
-        String pno = lbitid.getText();
+        String itemno = lbitid.getText();
+        String itemname = txtitname.getText();
+        String description = txtdes.getText();
+        String sellprice = txtsell.getText();
+        String buyprice = txtbuy.getText();
+        String qty = txtqty.getText();
         
         try {
-            pst = con.prepareStatement("update patient set patientname = ?, phone = ?, address = ? where patientno = ?");
-            
-            pst.setString(1, name);
-            pst.setString(2, phone);
-            pst.setString(3, address);
-            pst.setString(4, pno);
+            pst = con.prepareStatement("update item set itemname = ?, description = ?, sellprice = ?, buyprice = ?,  qty = ? where itemid = ?");
+
+            pst.setString(1, itemname);
+            pst.setString(2, description);
+            pst.setString(3, sellprice);
+            pst.setString(4, buyprice);
+            pst.setString(5, qty);
+            pst.setString(6, itemno);
             pst.executeUpdate();
             
-            JOptionPane.showMessageDialog(this, "Patient Updatedddd!");
+            JOptionPane.showMessageDialog(this, "Item Updateddd!");
             
             AutoID();
             txtitname.setText("");
             txtdes.setText("");
-            txtpa.setText("");
-            patien_table();
-            jButton1.setEnabled(true);
+            txtsell.setText("");
+            txtbuy.setText("");
+            txtqty.setText("");
+            txtitname.requestFocus();
+            item_table();
             
         } catch (SQLException ex) {
             Logger.getLogger(Patient.class.getName()).log(Level.SEVERE, null, ex);
@@ -448,21 +462,24 @@ public class Item extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
 
-        String pno = lbitid.getText();
+        String itemno = lbitid.getText();
         
         try {
-            pst = con.prepareStatement("delete from patient where patientno = ? ");
+            pst = con.prepareStatement("delete from item where itemid = ? ");
             
-            pst.setString(1, pno);
+            pst.setString(1, itemno);
             pst.executeUpdate();
             
-            JOptionPane.showMessageDialog(this, "Patient Deleteddddd!");
+            JOptionPane.showMessageDialog(this, "item Deleteddddd!");
             
             AutoID();
             txtitname.setText("");
             txtdes.setText("");
-            txtpa.setText("");
-            patien_table();
+            txtsell.setText("");
+            txtbuy.setText("");
+            txtqty.setText("");
+            txtitname.requestFocus();
+            item_table();
             jButton1.setEnabled(true);
             
         } catch (SQLException ex) {

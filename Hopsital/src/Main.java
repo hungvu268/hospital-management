@@ -129,6 +129,11 @@ public class Main extends javax.swing.JFrame {
         });
 
         jButton6.setText("Create Item");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Create User");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -278,6 +283,10 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
+        viewPrescription view = new viewPrescription();
+        view.setVisible(true);
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -310,6 +319,11 @@ public class Main extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         
+        Login lg =  new Login();
+        this.setVisible(false);
+        lg.setVisible(true);
+        
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -318,6 +332,13 @@ public class Main extends javax.swing.JFrame {
         ch.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Item i = new Item();
+        i.setVisible(true);
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
