@@ -37,7 +37,7 @@ public class Login extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/loyalhospital", "root", "");          
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hospital-management", "root", "");          
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
