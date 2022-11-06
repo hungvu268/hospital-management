@@ -39,7 +39,7 @@ public class viewPrescription extends javax.swing.JFrame {
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/loyalhospital", "root", "");          
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hospital-management", "root", "");          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
