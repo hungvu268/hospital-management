@@ -378,7 +378,7 @@ public class Patient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:      
         DefaultTableModel d1 = (DefaultTableModel)jTable1.getModel();
         int SelectIndex = jTable1.getSelectedRow();
         

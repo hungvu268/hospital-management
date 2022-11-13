@@ -31,12 +31,12 @@
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
                       <Component id="jButton10" min="-2" pref="111" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -200,7 +200,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="cc" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Loyal Hospital"/>
+        <Property name="text" type="java.lang.String" value="Hospital"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel2">

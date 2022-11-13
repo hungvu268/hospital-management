@@ -129,6 +129,11 @@ public class viewChannel extends javax.swing.JFrame {
         jLabel1.setText("View Channel");
 
         jButton1.setText("Exit");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -241,6 +246,11 @@ public class viewChannel extends javax.swing.JFrame {
         new Prescription(chno, doctorname).setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

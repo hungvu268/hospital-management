@@ -50,6 +50,7 @@ public class Main extends javax.swing.JFrame {
             jButton2.setVisible(false);
             jButton5.setVisible(false);
             jButton10.setVisible(false);
+            jButton4.setVisible(false);
             
         }else if(this.usertype.equals("Pharmacist")){
             
@@ -203,7 +204,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setText("Loyal Hospital");
+        jLabel1.setText("Hospital");
 
         jPanel2.setBackground(new java.awt.Color(102, 0, 102));
 
@@ -270,11 +271,11 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(281, 281, 281)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel1))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
